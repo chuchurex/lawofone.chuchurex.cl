@@ -33,6 +33,8 @@ CF_EMAIL=your-email
 CF_ZONE_ID=your-zone-id
 ```
 
+> ⚠️ **Important**: The `.env` file contains sensitive credentials and **should never be committed to git**. This file is already protected in `.gitignore`.
+
 ### 2. Install sshpass (if using password authentication)
 
 **macOS:**
@@ -209,15 +211,38 @@ node scripts/purge-cloudflare.js --all
 
 ## Security Best Practices
 
-1. **Never commit `.env`** - Already in `.gitignore`
-2. **Use SSH keys instead of passwords** - More secure
-3. **Set proper file permissions**:
-   ```bash
-   # On server
-   find ${UPLOAD_DIR} -type f -exec chmod 644 {} \;
-   find ${UPLOAD_DIR} -type d -exec chmod 755 {} \;
-   ```
-4. **Use environment variables in CI/CD** - GitHub Secrets, etc.
+### 1. SSH Authentication
+
+**Recommended**: Use SSH keys instead of passwords for better security.
+
+```bash
+# Generate key (if you don't have one)
+ssh-keygen -t ed25519 -C "your@email.com"
+
+# Copy to server
+ssh-copy-id -p ${UPLOAD_PORT} ${UPLOAD_USER}@${UPLOAD_HOST}
+```
+
+Then modify `scripts/deploy.js` to use keys instead of `sshpass`.
+
+### 2. File Permissions
+
+Set appropriate permissions on the server:
+
+```bash
+# Files: read/write for owner, read-only for others
+find ${UPLOAD_DIR} -type f -exec chmod 644 {} \;
+
+# Directories: read/write/execute for owner, read/execute for others
+find ${UPLOAD_DIR} -type d -exec chmod 755 {} \;
+```
+
+### 3. Environment Variables in CI/CD
+
+For automated deployment, use secret managers:
+- **GitHub Actions**: GitHub Secrets
+- **GitLab CI**: CI/CD Variables
+- **Local**: `.env` file (never commit)
 
 ## Continuous Deployment (CI/CD)
 
