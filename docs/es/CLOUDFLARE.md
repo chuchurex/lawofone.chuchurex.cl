@@ -1,11 +1,11 @@
-# Cloudflare Cache Management
+# Gestión de Caché de Cloudflare
 
-## Setup
+## Configuración
 
-Para usar el script de purga de cache de Cloudflare, agrega las siguientes variables a tu archivo `.env`:
+Para usar el script de purga de caché de Cloudflare, agrega las siguientes variables a tu archivo `.env`:
 
 ```bash
-# Cloudflare Configuration
+# Configuración de Cloudflare
 CF_API_KEY=tu_api_key_aqui
 CF_EMAIL=tu_email@ejemplo.com
 CF_ZONE_ID=tu_zone_id_aqui
@@ -38,7 +38,7 @@ Esto purgará:
 - `/es/`
 - `/es/index.html`
 
-### Purgar TODO el cache
+### Purgar TODO el caché
 
 ```bash
 node scripts/purge-cloudflare.js --all
@@ -58,4 +58,4 @@ node scripts/purge-cloudflare.js https://lawofone.chuchurex.cl/revision.html
 
 ## Nota
 
-El cache de Cloudflare se purga en segundos, pero puede tomar hasta 30 segundos para propagarse globalmente a todos los servidores edge.
+El caché de Cloudflare se purga en segundos, pero puede tomar hasta 30 segundos para propagarse globalmente a todos los servidores edge.

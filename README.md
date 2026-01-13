@@ -66,18 +66,31 @@ npm run publish
 lawofone.chuchurex.cl/
 ├── i18n/                     # Multilingual content
 │   ├── es/                   # Spanish
-│   │   ├── ui.json           # Site configuration
-│   │   ├── chapters/         # Book chapters
-│   │   ├── about.json        # About page
-│   │   ├── glossary.json     # Glossary of terms
-│   │   └── references.json   # References
-│   └── en/                   # English (if available)
+│   ├── en/                   # English
+│   └── pt/                   # Portuguese (if available)
+│       ├── ui.json           # Site configuration
+│       ├── chapters/         # Book chapters
+│       ├── about.json        # About page
+│       ├── glossary.json     # Glossary of terms
+│       └── references.json   # References
 ├── scripts/                  # Build and deploy scripts
 ├── scss/                     # Custom styles
 ├── templates/                # HTML templates
+├── docs/                     # Documentation (multilingual)
+│   ├── en/                   # English docs
+│   ├── es/                   # Spanish docs
+│   └── pt/                   # Portuguese docs
 ├── robots.txt                # Crawler blocking (private)
 └── .env.example              # Configuration template
 ```
+
+## 📚 Documentation
+
+Complete documentation is available in multiple languages:
+
+- 🇬🇧 **[English Documentation](./docs/en/README.md)**
+- 🇪🇸 **[Documentación en Español](./docs/es/README.md)**
+- 🇧🇷 **[Documentação em Português](./docs/pt/README.md)**
 
 ## 🔒 Privacy
 
