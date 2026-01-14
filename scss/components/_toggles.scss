@@ -19,6 +19,8 @@
 .nav-toggle {
   top: $spacing-sm;
   left: $spacing-sm;
+  // Hidden on desktop - only visible on tablet/mobile
+  display: none;
 }
 
 .notes-toggle {

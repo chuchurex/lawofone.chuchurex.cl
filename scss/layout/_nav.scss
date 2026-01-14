@@ -14,7 +14,8 @@
   z-index: 100;
   background: $bg2;
   border-right: 1px solid $border;
-  padding: 3.5rem $spacing-md $spacing-lg $spacing-md;
+  padding: 3rem $spacing-md $spacing-lg $spacing-md;
+  padding-top: 3.5rem;
   // Sidebar open by default
   transform: translateX(0);
   // Position context for language selector
