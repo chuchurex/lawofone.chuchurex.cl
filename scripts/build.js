@@ -278,11 +278,6 @@ function generateChapterNav(chapters, currentChapter, ui, lang, allLangs) {
 
   html += `            </div>\n`;
 
-  // Feedback Link
-  html += `            <div class="nav-footer-links">\n`;
-  html += `                <a href="#feedback-section" class="nav-link feedback-link" onclick="if(window.innerWidth<=1100)closeAll()">✧ ${ui.footer.formSubmit}</a>\n`;
-  html += `            </div>\n`;
-
   // About link
   html += `            <div class="nav-footer-links">\n`;
   html += `                <a href="${langPrefix}/about/" class="nav-link">${ui.nav.about}</a>\n`;
@@ -365,18 +360,6 @@ function generateFooter(ui, showFeedback = true) {
     html += `                <p>${ui.footerVersion}</p>\n`;
   }
 
-  if (showFeedback) {
-    html += `                <div class="feedback" id="feedback-section">\n`;
-    html += `                    <h3>${ui.footer.feedbackTitle}</h3>\n`;
-    html += `                    <form class="feedback-form" id="feedback-form">\n`;
-    html += `                        <input type="text" id="fb-name" placeholder="${ui.footer.formName}" required>\n`;
-    html += `                        <input type="email" id="fb-email" placeholder="${ui.footer.formEmail}" required>\n`;
-    html += `                        <textarea id="fb-msg" placeholder="${ui.footer.formMessage}" required></textarea>\n`;
-    html += `                        <button type="submit" class="feedback-btn">${ui.footer.formSubmit}</button>\n`;
-    html += `                    </form>\n`;
-    html += `                    <div id="feedback-success" style="display:none; color:var(--gold); margin-top:1rem; font-family:var(--font-heading);">${ui.footer.formSuccess}</div>\n`;
-    html += `                </div>\n`;
-  }
 
   // L/L Research Attribution
   if (ui.footer.attribution) {
@@ -575,44 +558,6 @@ function generateScripts() {
         function toggleMediaPanel(type){const panel=document.getElementById('panel-'+type);const btn=document.querySelector('[data-panel="'+type+'"]');if(!panel||!btn)return;const isActive=panel.classList.contains('active');document.querySelectorAll('.ch-media-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ch-media-icon').forEach(b=>b.classList.remove('active'));if(!isActive){panel.classList.add('active');btn.classList.add('active')}}
         document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=1100)closeAll()}));
 
-        document.getElementById('feedback-form')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            const name = document.getElementById('fb-name').value;
-            const email = document.getElementById('fb-email').value;
-            const message = document.getElementById('fb-msg').value;
-            const lang = document.documentElement.lang;
-
-            btn.disabled = true;
-            btn.style.opacity = '0.5';
-
-            fetch('/api/send-feedback', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    message: message,
-                    lang: lang
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('feedback-form').style.display = 'none';
-                    document.getElementById('feedback-success').style.display = 'block';
-                } else {
-                    alert('Error: ' + (data.message || 'Unknown error'));
-                    btn.disabled = false;
-                    btn.style.opacity = '1';
-                }
-            })
-            .catch(err => {
-                alert('Connection error. Please try again later.');
-                btn.disabled = false;
-                btn.style.opacity = '1';
-            });
-        });
     </script>`;
 }
 

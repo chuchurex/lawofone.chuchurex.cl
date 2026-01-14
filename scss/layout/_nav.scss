@@ -159,18 +159,6 @@
   @extend %border-bottom-subtle;
   border-bottom: none;
   border-top: 1px solid $border;
-
-  .feedback-link {
-    font-family: $font-heading;
-    color: $gold;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-
-    &:hover {
-      color: $text;
-      border-left-color: $gold;
-    }
-  }
 }
 
 .nav-lang-selector {
